@@ -25,7 +25,7 @@ class MoviesController < ApplicationController
      @ratings_to_show = Movie.ratings_to_show
      session[:ratings] = params[:ratings]
    end
-   if params[:sort] != nil and session[:sort] != nil
+   unless params[:sort] == nil and session[:sort] == nil
      if params[:sort] == nil
        params[:sort] = session[:sort]
      end
