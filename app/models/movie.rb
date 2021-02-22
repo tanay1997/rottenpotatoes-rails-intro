@@ -1,8 +1,7 @@
 class Movie < ActiveRecord::Base
 
   def self.all_ratings
-    @all_ratings = ['G','PG','PG-13','R']
-    return @all_ratings
+    return ['G','PG','PG-13','R']
   end
 
   def self.with_ratings(ratings)
@@ -11,12 +10,11 @@ class Movie < ActiveRecord::Base
     @movies = Movie.where(rating: ratings)
   end
 
-
   def self.ratings_to_show
     return @ratings_to_show
   end
 
-  def self.sort_by(movies, key)
+  def self.sortMovies(movies, key)
     return movies.order(key)
   end
 

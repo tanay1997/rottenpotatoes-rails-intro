@@ -14,7 +14,7 @@ class MoviesController < ApplicationController
    end
 
    if params[:ratings] == nil and session[:ratings] == nil
-     @ratings_to_show = Movie.all_ratings
+     @ratings_to_show = @all_ratings
      @movies = Movie.all
    else
      if params[:ratings] == nil
@@ -30,7 +30,7 @@ class MoviesController < ApplicationController
        params[:sort] = session[:sort]
      end
      @sort_field = params[:sort]
-     @movies = Movie.sort_by(@movies, params[:sort])
+     @movies = Movie.sortMovies(@movies, params[:sort])
      session[:sort] = params[:sort]
    end
 
