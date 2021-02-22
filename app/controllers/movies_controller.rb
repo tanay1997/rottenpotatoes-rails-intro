@@ -30,7 +30,7 @@ class MoviesController < ApplicationController
        params[:sort] = session[:sort]
      end
      @sort_field = params[:sort]
-     @movies = Movie.sortMovies(@movies, params[:sort])
+     @movies = @movies.order(@sort_field)
      session[:sort] = params[:sort]
    end
 
