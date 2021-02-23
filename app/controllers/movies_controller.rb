@@ -25,12 +25,12 @@ class MoviesController < ApplicationController
      @ratings_to_show = Movie.ratings_to_show
      session[:ratings] = params[:ratings]
    end
-   if not (params[:sort] == nil and session[:sort] == nil)
+
+   if params[:sort] != nil or session[:sort] != nil
      if params[:sort] == nil
        params[:sort] = session[:sort]
      end
-     @sort_field = params[:sort]
-     @movies = @movies.order(@sort_field)
+     @movies = @movies.order(params[:sort])
      session[:sort] = params[:sort]
    end
 
