@@ -30,6 +30,7 @@ class MoviesController < ApplicationController
      if params[:sort] == nil
        params[:sort] = session[:sort]
      end
+     @sort_field = params[:sort]
      @movies = @movies.order(params[:sort])
      session[:sort] = params[:sort]
    end
