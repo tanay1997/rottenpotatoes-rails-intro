@@ -9,6 +9,7 @@ class MoviesController < ApplicationController
   def index
    # @movies = Movie.all
    @all_ratings = Movie.all_ratings
+   @sort = params[:sort] || session[:sort]
    session[:ratings] = params[:ratings] if params[:commit] == "Refresh"
 
    if params[:ratings] == nil and session[:ratings] == nil
@@ -23,7 +24,6 @@ class MoviesController < ApplicationController
    end
 
    if not (params[:sort] == nil and session[:sort] == nil)
-     @sort = params[:sort] || session[:sort]
      @movies = @movies.order(@sort)
      session[:sort] = @sort
    end
