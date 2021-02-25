@@ -16,13 +16,12 @@ class MoviesController < ApplicationController
    if params[:ratings] == nil and session[:ratings] == nil
      @ratings_to_show = @all_ratings
      @movies = Movie.all
-   elsif params[:ratings] == nil
-       params[:ratings] = session[:ratings]
-       redirect_to(movies_path(ratings: params[:ratings], sort: params[:sort]))
    else
-     @movies = Movie.with_ratings(params[:ratings].keys)
+     @ratings = params[:ratings] || session[:ratings] 
+     redirect_to(movies_path(ratings: @ratings, sort: params[:sort])) if params[:ratings] == nil
+     @movies = Movie.with_ratings(@ratings.keys)
      @ratings_to_show = Movie.ratings_to_show
-     session[:ratings] = params[:ratings]
+     session[:ratings] = @ratings
    end
 
    if not (params[:sort] == nil and session[:sort] == nil)
