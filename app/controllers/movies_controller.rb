@@ -27,9 +27,9 @@ class MoviesController < ApplicationController
    end
 
    if not (params[:sort] == nil and session[:sort] == nil)
-     @sort_field = params[:sort] || session[:sort]
-     @movies = @movies.order(@sort_field)
-     session[:sort] = @sort_field
+     @sort = params[:sort] || session[:sort]
+     @movies = @movies.order(@sort)
+     session[:sort] = @sort
    end
 
   end
