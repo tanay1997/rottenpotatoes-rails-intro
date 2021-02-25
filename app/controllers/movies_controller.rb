@@ -12,7 +12,7 @@ class MoviesController < ApplicationController
    session[:ratings] = params[:ratings] if params[:commit] == "Refresh"
 
    if params[:ratings] == nil and session[:ratings] == nil
-     @iratings_to_show = @all_ratings
+     @ratings_to_show = @all_ratings
      @movies = Movie.all
    else
      @ratings = params[:ratings] || session[:ratings] 
