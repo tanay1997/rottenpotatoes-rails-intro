@@ -23,7 +23,7 @@ class MoviesController < ApplicationController
      session[:ratings] = @ratings
    end
 
-   if params[:sort] == nil or session[:sort] == nil
+   if not (params[:sort] == nil or session[:sort] == nil)
      @movies = @movies.order(@sort)
      session[:sort] = @sort
    end
