@@ -9,23 +9,21 @@ class MoviesController < ApplicationController
   def index
    # @movies = Movie.all
    @all_ratings = Movie.all_ratings
-   if params[:commit] == "Refresh"
-     session[:ratings] = params[:ratings]
-   end
+   @sort = params[:sort] || session[:sort]
+   session[:ratings] = params[:ratings] if params[:commit] == "Refresh"
 
    if params[:ratings] == nil and session[:ratings] == nil
-     @ratings_to_show = @all_ratings
+     @iratings_to_show = @all_ratings
      @movies = Movie.all
    else
      @ratings = params[:ratings] || session[:ratings] 
-     redirect_to(movies_path(ratings: @ratings, sort: params[:sort])) if params[:ratings] == nil
+     redirect_to(movies_path(ratings: @ratings, sort: @sort)) if params[:ratings] == nil
      @movies = Movie.with_ratings(@ratings.keys)
      @ratings_to_show = Movie.ratings_to_show
      session[:ratings] = @ratings
    end
 
    if not (params[:sort] == nil and session[:sort] == nil)
-     @sort = params[:sort] || session[:sort]
      @movies = @movies.order(@sort)
      session[:sort] = @sort
    end
