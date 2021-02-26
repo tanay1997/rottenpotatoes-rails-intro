@@ -27,7 +27,6 @@ class MoviesController < ApplicationController
      @movies = @movies.order(@sort)
      session[:sort] = @sort
    end
-
   end
 
   def new
